@@ -18,7 +18,7 @@
 //! Test mock for unit tests and benchmarking
 
 use crate::{StorageCleanerPrecompile, StorageCleanerPrecompileCall};
-use frame_support::{parameter_types, weights::Weight};
+use frame_support::{derive_impl, parameter_types, weights::Weight};
 use pallet_evm::{EnsureAddressNever, EnsureAddressRoot, IdentityAddressMapping};
 use precompile_utils::{precompile_set::*, testing::*};
 use sp_core::{ConstU32, H256, U256};
@@ -127,6 +127,7 @@ parameter_types! {
 	pub SuicideQuickClearLimit: u32 = 0;
 }
 
+#[derive_impl(pallet_evm::config_preludes::TestDefaultConfig)]
 impl pallet_evm::Config for Runtime {
 	type AccountProvider = pallet_evm::FrameSystemAccountProvider<Self>;
 	type FeeCalculator = ();

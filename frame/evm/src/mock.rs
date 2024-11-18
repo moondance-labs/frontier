@@ -77,7 +77,6 @@ impl crate::Config for Test {
 	type CreateInnerOrigin = EnsureAllowedCreateAddress<AllowedAddressesCreateInner>;
 
 	type WithdrawOrigin = EnsureAddressNever<Self::AccountId>;
-	type AddressMapping = IdentityAddressMapping;
 	type Currency = Balances;
 	type PrecompilesType = MockPrecompileSet;
 	type PrecompilesValue = MockPrecompiles;

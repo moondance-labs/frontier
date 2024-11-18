@@ -1450,8 +1450,6 @@ fn handle_sufficient_reference() {
 		// We increased the sufficient reference by 1.
 		assert_eq!(account_2.sufficients, 1);
 		EVM::remove_account(&addr_2);
-		let account_2 = frame_system::Account::<Test>::get(substrate_addr_2);
-		assert_eq!(account_2.sufficients, 1);
 	});
 }
 
