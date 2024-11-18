@@ -135,6 +135,7 @@ parameter_types! {
 	pub BlockGasLimit: U256 = U256::max_value();
 	pub WeightPerGas: Weight = Weight::from_parts(20_000, 0);
 }
+#[derive_impl(pallet_evm::config_preludes::TestDefaultConfig)]
 impl pallet_evm::Config for Test {
 	type AccountProvider = pallet_evm::FrameSystemAccountProvider<Self>;
 	type FeeCalculator = FixedGasPrice;
