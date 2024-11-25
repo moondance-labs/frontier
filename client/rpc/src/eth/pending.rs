@@ -131,7 +131,12 @@ where
 			.graph
 			.validated_pool()
 			.ready()
-			.map(|in_pool_tx| in_pool_tx.data().deref().clone())
+			.map(|in_pool_tx| {
+				sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::into_inner(
+					in_pool_tx.data().clone(),
+				)
+				.unwrap()
+			})
 			.collect::<Vec<<B as BlockT>::Extrinsic>>();
 		log::debug!(target: LOG_TARGET, "Pending runtime API: extrinsic len = {}", extrinsics.len());
 		// Apply the extrinsics from the ready queue to the pending block's state.

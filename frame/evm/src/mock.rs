@@ -21,8 +21,9 @@ use frame_support::{derive_impl, parameter_types, weights::Weight};
 use sp_core::{H160, U256};
 
 use crate::{
-    EnsureAddressNever, EnsureAddressRoot, FeeCalculator, IsPrecompileResult, Precompile, PrecompileHandle, PrecompileResult,
-	PrecompileSet, IdentityAddressMapping, EnsureAllowedCreateAddress
+	EnsureAddressNever, EnsureAddressRoot, EnsureAllowedCreateAddress, FeeCalculator,
+	IdentityAddressMapping, IsPrecompileResult, Precompile, PrecompileHandle, PrecompileResult,
+	PrecompileSet,
 };
 
 frame_support::construct_runtime! {

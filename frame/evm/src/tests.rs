@@ -20,14 +20,14 @@
 use super::*;
 use crate::mock::*;
 
+use evm::ExitReason;
+use fp_evm::ExecutionInfoV2;
 use frame_support::{
 	assert_ok,
 	traits::{LockIdentifier, LockableCurrency, WithdrawReasons},
 };
 use sp_runtime::BuildStorage;
 use std::{collections::BTreeMap, str::FromStr};
-use fp_evm::ExecutionInfoV2;
-use evm::ExitReason;
 
 mod proof_size_test {
 	use super::*;
@@ -879,7 +879,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 		},
 	);
 	accounts.insert(
-		H160::from([4u8;20]), // alith
+		H160::from([4u8; 20]), // alith
 		GenesisAccount {
 			nonce: U256::from(1),
 			balance: U256::max_value(),
@@ -888,7 +888,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 		},
 	);
 	accounts.insert(
-		H160::from([5u8;20]), // bob
+		H160::from([5u8; 20]), // bob
 		GenesisAccount {
 			nonce: U256::from(1),
 			balance: U256::max_value(),
@@ -897,7 +897,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 		},
 	);
 	accounts.insert(
-		H160::from([6u8;20]), // charleth
+		H160::from([6u8; 20]), // charleth
 		GenesisAccount {
 			nonce: U256::from(1),
 			balance: U256::max_value(),
@@ -927,7 +927,6 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 	t.into()
 }
 
-
 // pragma solidity ^0.8.2;
 
 // contract Foo {
@@ -951,7 +950,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 //  }
 //}
 pub const FOO_BAR_CONTRACT_CREATOR_BYTECODE: &str =
-		include_str!("./res/foo_bar_contract_creator.txt");
+	include_str!("./res/foo_bar_contract_creator.txt");
 
 fn create_foo_bar_contract_creator(
 	gas_limit: u64,
@@ -975,14 +974,14 @@ fn create_foo_bar_contract_creator(
 }
 
 #[test]
-fn test_contract_deploy_succeeds_if_address_is_allowed(){
+fn test_contract_deploy_succeeds_if_address_is_allowed() {
 	new_test_ext().execute_with(|| {
 		let gas_limit: u64 = 1_000_000;
 		let weight_limit = FixedGasWeightMapping::<Test>::gas_to_weight(gas_limit, true);
 
 		<Test as Config>::Runner::create(
 			// Alith is allowed to deploy contracts
-			H160::from([4u8;20]),
+			H160::from([4u8; 20]),
 			hex::decode(FOO_BAR_CONTRACT_CREATOR_BYTECODE.trim_end()).unwrap(),
 			U256::zero(),
 			gas_limit,
@@ -995,19 +994,20 @@ fn test_contract_deploy_succeeds_if_address_is_allowed(){
 			Some(weight_limit),
 			Some(0),
 			&<Test as Config>::config().clone(),
-		).is_ok();
+		)
+		.is_ok();
 	});
 }
 
 #[test]
-fn test_contract_deploy_fails_if_address_not_allowed(){
+fn test_contract_deploy_fails_if_address_not_allowed() {
 	new_test_ext().execute_with(|| {
 		let gas_limit: u64 = 1_000_000;
 		let weight_limit = FixedGasWeightMapping::<Test>::gas_to_weight(gas_limit, true);
 
 		match <Test as Config>::Runner::create(
 			// Bob is not allowed to deploy contracts
-			H160::from([5u8;20]),
+			H160::from([5u8; 20]),
 			hex::decode(FOO_BAR_CONTRACT_CREATOR_BYTECODE.trim_end()).unwrap(),
 			U256::zero(),
 			gas_limit,
@@ -1031,20 +1031,20 @@ fn test_contract_deploy_fails_if_address_not_allowed(){
 }
 
 #[test]
-fn test_inner_contract_deploy_succeeds_if_address_is_allowed(){
+fn test_inner_contract_deploy_succeeds_if_address_is_allowed() {
 	new_test_ext().execute_with(|| {
 		let gas_limit: u64 = 1_000_000;
 		let weight_limit = FixedGasWeightMapping::<Test>::gas_to_weight(gas_limit, true);
 
 		let result1 = create_foo_bar_contract_creator(gas_limit, Some(weight_limit))
-				.expect("create succeeds");
+			.expect("create succeeds");
 
 		let call_data: String = "2fc11060".to_owned();
 		let call_contract_address = result1.value;
 
 		let result = <Test as Config>::Runner::call(
 			// Alith is allowed to deploy inner contracts
-			H160::from([4u8;20]),
+			H160::from([4u8; 20]),
 			call_contract_address,
 			hex::decode(&call_data).unwrap(),
 			U256::zero(),
@@ -1061,25 +1061,28 @@ fn test_inner_contract_deploy_succeeds_if_address_is_allowed(){
 		)
 		.expect("call succeeds");
 
-		assert_eq!(result.exit_reason, ExitReason::Succeed(ExitSucceed::Returned));
+		assert_eq!(
+			result.exit_reason,
+			ExitReason::Succeed(ExitSucceed::Returned)
+		);
 	});
 }
 
 #[test]
-fn test_inner_contract_deploy_reverts_if_address_not_allowed(){
+fn test_inner_contract_deploy_reverts_if_address_not_allowed() {
 	new_test_ext().execute_with(|| {
 		let gas_limit: u64 = 1_000_000;
 		let weight_limit = FixedGasWeightMapping::<Test>::gas_to_weight(gas_limit, true);
 
 		let result1 = create_foo_bar_contract_creator(gas_limit, Some(weight_limit))
-				.expect("create succeeds");
+			.expect("create succeeds");
 
 		let call_data: String = "2fc11060".to_owned();
 		let call_contract_address = result1.value;
 
 		let result = <Test as Config>::Runner::call(
 			// Charleth is not allowed to deploy inner contracts
-			H160::from([6u8;20]),
+			H160::from([6u8; 20]),
 			call_contract_address,
 			hex::decode(&call_data).unwrap(),
 			U256::zero(),
