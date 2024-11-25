@@ -316,7 +316,7 @@ fn default_checks_revert_when_called_by_contract() {
 		pallet_evm::Pallet::<Runtime>::create_account(
 			Alice.into(),
 			hex_literal::hex!("1460006000fd").to_vec(),
-			None
+			None,
 		);
 
 		precompiles()

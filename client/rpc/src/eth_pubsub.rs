@@ -165,7 +165,12 @@ where
 				return future::ready(None);
 			};
 
-			let xts = vec![xt.data().as_ref().clone()];
+			let xts = vec![
+				sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::into_inner(
+					xt.data().clone(),
+				)
+				.unwrap(),
+			];
 
 			let txs: Option<Vec<EthereumTransaction>> = if api_version > 1 {
 				api.extrinsic_filter(best_block, xts).ok()
