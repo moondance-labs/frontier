@@ -112,10 +112,9 @@ where
 					.validated_pool()
 					.ready()
 					.map(|in_pool_tx| {
-						sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::into_inner(
+						sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::unwrap_or_clone(
 							in_pool_tx.data().clone(),
 						)
-						.unwrap()
 					})
 					.collect();
 				// Use the runtime to match the (here) opaque extrinsics against ethereum transactions.
@@ -230,7 +229,7 @@ where
 							.graph
 							.validated_pool()
 							.ready()
-							.map(|in_pool_tx|  sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::into_inner(in_pool_tx.data().clone()).unwrap())
+							.map(|in_pool_tx|  sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::unwrap_or_clone(in_pool_tx.data().clone()))
 							.collect();
 						// Use the runtime to match the (here) opaque extrinsics against ethereum transactions.
 						let api = self.client.runtime_api();

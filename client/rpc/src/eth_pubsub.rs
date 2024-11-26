@@ -166,10 +166,9 @@ where
 			};
 
 			let xts = vec![
-				sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::into_inner(
+				sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::unwrap_or_clone(
 					xt.data().clone(),
-				)
-				.unwrap(),
+				),
 			];
 
 			let txs: Option<Vec<EthereumTransaction>> = if api_version > 1 {

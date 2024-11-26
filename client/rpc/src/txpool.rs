@@ -110,10 +110,9 @@ where
 			.validated_pool()
 			.ready()
 			.map(|in_pool_tx| {
-				sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::into_inner(
+				sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::unwrap_or_clone(
 					in_pool_tx.data().clone(),
 				)
-				.unwrap()
 			})
 			.collect();
 
@@ -124,10 +123,9 @@ where
 			.futures()
 			.iter()
 			.map(|(_, extrinsic)| {
-				sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::into_inner(
+				sc_service::Arc::<<B as sp_runtime::traits::Block>::Extrinsic>::unwrap_or_clone(
 					extrinsic.clone(),
 				)
-				.unwrap()
 			})
 			.collect();
 
