@@ -1,9 +1,9 @@
 //! Service and ServiceFactory implementation. Specialized wrapper over substrate service.
 
-use std::{cell::RefCell, default::Default as StdDefault, path::Path, sync::Arc, time::Duration};
+use std::{cell::RefCell, path::Path, sync::Arc, time::Duration};
 
 use futures::{channel::mpsc, prelude::*};
-use jsonrpsee::server::middleware::http::Port::Default;
+
 // Substrate
 use prometheus_endpoint::Registry;
 use sc_client_api::{Backend as BackendT, BlockBackend};
@@ -173,7 +173,7 @@ where
 	)?;
 
 	let transaction_pool = sc_transaction_pool::BasicPool::new_full(
-		StdDefault::default(),
+		Default::default(),
 		config.role.is_authority().into(),
 		config.prometheus_registry(),
 		task_manager.spawn_essential_handle(),
@@ -239,7 +239,7 @@ where
 			create_inherent_data_providers,
 			spawner: &task_manager.spawn_essential_handle(),
 			registry: config.prometheus_registry(),
-			check_for_equivocation: StdDefault::default(),
+			check_for_equivocation: Default::default(),
 			telemetry,
 			compatibility_mode: sc_consensus_aura::CompatibilityMode::None,
 		},
@@ -405,7 +405,7 @@ where
 	// This way we avoid race conditions when using native substrate block import notification stream.
 	let pubsub_notification_sinks: fc_mapping_sync::EthereumBlockNotificationSinks<
 		fc_mapping_sync::EthereumBlockNotification<B>,
-	> = StdDefault::default();
+	> = Default::default();
 	let pubsub_notification_sinks = Arc::new(pubsub_notification_sinks);
 
 	// for ethereum-compatibility rpc.
