@@ -45,9 +45,6 @@ pub type HostFunctions = (
 #[cfg(not(feature = "runtime-benchmarks"))]
 pub type HostFunctions = sp_io::SubstrateHostFunctions;
 
-type FullPool<B, Client> =
-	sc_transaction_pool::BasicPool<sc_transaction_pool::FullChainApi<Client, B>, B>;
-
 pub type Backend = FullBackend<Block>;
 pub type Client = FullClient<Block, RuntimeApi, HostFunctions>;
 
@@ -178,7 +175,7 @@ where
 		config.prometheus_registry(),
 		task_manager.spawn_essential_handle(),
 		client.clone(),
-	));
+	);
 
 	Ok(PartialComponents {
 		client,
