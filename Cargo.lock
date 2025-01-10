@@ -2835,7 +2835,7 @@ dependencies = [
 [[package]]
 name = "evm"
 version = "0.41.0"
-source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#097c687c30bac4e9978a4efbe3b1dd90a83b56d0"
+source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#c6091865434f950c48e0ed99216d54bb53e17186"
 dependencies = [
  "auto_impl",
  "environmental",
@@ -2855,7 +2855,7 @@ dependencies = [
 [[package]]
 name = "evm-core"
 version = "0.41.0"
-source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#097c687c30bac4e9978a4efbe3b1dd90a83b56d0"
+source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#c6091865434f950c48e0ed99216d54bb53e17186"
 dependencies = [
  "parity-scale-codec",
  "primitive-types 0.13.1",
@@ -2866,7 +2866,7 @@ dependencies = [
 [[package]]
 name = "evm-gasometer"
 version = "0.41.0"
-source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#097c687c30bac4e9978a4efbe3b1dd90a83b56d0"
+source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#c6091865434f950c48e0ed99216d54bb53e17186"
 dependencies = [
  "environmental",
  "evm-core",
@@ -2877,7 +2877,7 @@ dependencies = [
 [[package]]
 name = "evm-runtime"
 version = "0.41.0"
-source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#097c687c30bac4e9978a4efbe3b1dd90a83b56d0"
+source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#c6091865434f950c48e0ed99216d54bb53e17186"
 dependencies = [
  "auto_impl",
  "environmental",
@@ -6921,7 +6921,7 @@ version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "af1844ef2428cc3e1cb900be36181049ef3d3193c63e43026cfe202983b27a56"
 dependencies = [
- "proc-macro-crate 3.2.0",
+ "proc-macro-crate 1.1.3",
  "proc-macro2",
  "quote",
  "syn 2.0.93",
