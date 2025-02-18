@@ -3,7 +3,6 @@
 use std::{cell::RefCell, path::Path, sync::Arc, time::Duration};
 
 use futures::{channel::mpsc, prelude::*};
-
 // Substrate
 use prometheus_endpoint::Registry;
 use sc_client_api::{Backend as BackendT, BlockBackend};
@@ -169,13 +168,14 @@ where
 		grandpa_block_import,
 	)?;
 
-	let transaction_pool = sc_transaction_pool::BasicPool::new_full(
+	// FIXME: The `config.transaction_pool.options` field is private, so for now use its default value
+	let transaction_pool = Arc::from(BasicPool::new_full(
 		Default::default(),
 		config.role.is_authority().into(),
 		config.prometheus_registry(),
 		task_manager.spawn_essential_handle(),
 		client.clone(),
-	);
+	));
 
 	Ok(PartialComponents {
 		client,
@@ -184,7 +184,7 @@ where
 		task_manager,
 		select_chain,
 		import_queue,
-		transaction_pool: transaction_pool.into(),
+		transaction_pool,
 		other: (
 			telemetry,
 			block_import,
