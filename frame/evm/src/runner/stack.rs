@@ -1001,14 +1001,14 @@ where
 		address: H160,
 		code: Vec<u8>,
 		caller: Option<H160>,
-	) -> Result<(), ExitError> {
+	) {
 		log::debug!(
 			target: "evm",
 			"Inserting code ({} bytes) at {:?}",
 			code.len(),
 			address
 		);
-		return Pallet::<T>::create_account(address, code, caller);
+		let _ = Pallet::<T>::create_account(address, code, caller);
 	}
 
 	fn transfer(&mut self, transfer: Transfer) -> Result<(), ExitError> {
