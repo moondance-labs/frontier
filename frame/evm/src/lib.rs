@@ -262,7 +262,6 @@ pub mod pallet {
 			type FindAuthor = FindAuthorTruncated;
 			type GasLimitPovSizeRatio = GasLimitPovSizeRatio;
 			type GasLimitStorageGrowthRatio = GasLimitStorageGrowthRatio;
-			type SuicideQuickClearLimit = SuicideQuickClearLimit;
 
 			type CreateOrigin = ();
 
@@ -982,13 +981,6 @@ impl<T: Config> Pallet<T> {
 				let error: &'static str = e.into();
 				ExitError::Other(Cow::Borrowed(error))
 			})?;
-		}
-		if <Suicided<T>>::contains_key(address) {
-			// This branch should never trigger, because when Suicided
-			// contains an address, then its nonce will be at least one,
-			// which causes CreateCollision error in EVM, but we add it
-			// here for safeguard.
-			return Ok(());
 		}
 
 		if code.is_empty() {
