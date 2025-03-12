@@ -2493,7 +2493,7 @@ dependencies = [
 [[package]]
 name = "evm"
 version = "0.42.0"
-source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#4f16e4d093c992f86fd5ef98541d727c85c7145c"
+source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable-2412-slots-xcm#4f16e4d093c992f86fd5ef98541d727c85c7145c"
 dependencies = [
  "auto_impl",
  "environmental",
@@ -2513,7 +2513,7 @@ dependencies = [
 [[package]]
 name = "evm-core"
 version = "0.42.0"
-source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#4f16e4d093c992f86fd5ef98541d727c85c7145c"
+source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable-2412-slots-xcm#4f16e4d093c992f86fd5ef98541d727c85c7145c"
 dependencies = [
  "parity-scale-codec",
  "primitive-types 0.13.1",
@@ -2524,7 +2524,7 @@ dependencies = [
 [[package]]
 name = "evm-gasometer"
 version = "0.42.0"
-source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#4f16e4d093c992f86fd5ef98541d727c85c7145c"
+source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable-2412-slots-xcm#4f16e4d093c992f86fd5ef98541d727c85c7145c"
 dependencies = [
  "environmental",
  "evm-core",
@@ -2535,7 +2535,7 @@ dependencies = [
 [[package]]
 name = "evm-runtime"
 version = "0.42.0"
-source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable2412#4f16e4d093c992f86fd5ef98541d727c85c7145c"
+source = "git+https://github.com/moondance-labs/evm?branch=tanssi-polkadot-stable-2412-slots-xcm#4f16e4d093c992f86fd5ef98541d727c85c7145c"
 dependencies = [
  "auto_impl",
  "environmental",
