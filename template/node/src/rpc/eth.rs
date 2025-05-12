@@ -10,7 +10,7 @@ use sc_client_api::{
 use sc_network::service::traits::NetworkService;
 use sc_network_sync::SyncingService;
 use sc_rpc::SubscriptionTaskExecutor;
-use sc_transaction_pool::{ChainApi, Pool};
+use sc_transaction_pool::ChainApi;
 use sc_transaction_pool_api::TransactionPool;
 use sp_api::{CallApiAt, ProvideRuntimeApi};
 use sp_block_builder::BlockBuilder as BlockBuilderApi;
@@ -24,6 +24,8 @@ pub use fc_rpc::{EthBlockDataCacheTask, EthConfig};
 pub use fc_rpc_core::types::{FeeHistoryCache, FeeHistoryCacheLimit, FilterPool};
 use fc_storage::StorageOverride;
 use fp_rpc::{ConvertTransaction, ConvertTransactionRuntimeApi, EthereumRuntimeRPCApi};
+
+type Pool<Api> = sc_transaction_pool::Pool<Api, ()>;
 
 /// Extra dependencies for Ethereum compatibility.
 pub struct EthDeps<B: BlockT, C, P, A: ChainApi, CT, CIDP> {

@@ -979,7 +979,7 @@ impl<T: Config> Pallet<T> {
 		if let Some(caller_address) = caller {
 			T::CreateInnerOrigin::check_create_origin(&caller_address).map_err(|e| {
 				let error: &'static str = e.into();
-				ExitError::Other(Cow::Borrowed(error))
+				ExitError::Other(Cow::Borrowed(error).into())
 			})?;
 		}
 

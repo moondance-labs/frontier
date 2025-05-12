@@ -36,7 +36,7 @@ use jsonrpsee::core::{async_trait, RpcResult};
 // Substrate
 use sc_client_api::backend::{Backend, StorageProvider};
 use sc_network_sync::SyncingService;
-use sc_transaction_pool::{ChainApi, Pool};
+use sc_transaction_pool::ChainApi;
 use sc_transaction_pool_api::TransactionPool;
 use sp_api::{CallApiAt, ProvideRuntimeApi};
 use sp_block_builder::BlockBuilder as BlockBuilderApi;
@@ -59,6 +59,7 @@ use crate::{
 
 pub use self::{execute::EstimateGasAdapter, filter::EthFilter};
 
+type Pool<Api> = sc_transaction_pool::Pool<Api, ()>;
 // Configuration trait for RPC configuration.
 pub trait EthConfig<B: BlockT, C>: Send + Sync + 'static {
 	type EstimateGasAdapter: EstimateGasAdapter + Send + Sync;

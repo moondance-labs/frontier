@@ -23,7 +23,7 @@ use ethereum_types::{H160, H256, U256};
 use jsonrpsee::core::RpcResult;
 use serde::Serialize;
 // substrate
-use sc_transaction_pool::{ChainApi, Pool};
+use sc_transaction_pool::ChainApi;
 use sc_transaction_pool_api::InPoolTransaction;
 use sp_api::ProvideRuntimeApi;
 use sp_blockchain::HeaderBackend;
@@ -37,6 +37,8 @@ use fc_rpc_core::{
 use fp_rpc::EthereumRuntimeRPCApi;
 
 use crate::{internal_err, public_key};
+
+type Pool<Api> = sc_transaction_pool::Pool<Api, ()>;
 
 struct TxPoolTransactions {
 	ready: Vec<EthereumTransaction>,

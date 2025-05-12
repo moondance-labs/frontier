@@ -28,7 +28,7 @@ use ethereum_types::{H256, U256};
 use jsonrpsee::core::{async_trait, RpcResult};
 // Substrate
 use sc_client_api::backend::{Backend, StorageProvider};
-use sc_transaction_pool::{ChainApi, Pool};
+use sc_transaction_pool::ChainApi;
 use sc_transaction_pool_api::InPoolTransaction;
 use sp_api::ProvideRuntimeApi;
 use sp_blockchain::HeaderBackend;
@@ -42,6 +42,8 @@ use fc_rpc_core::{types::*, EthFilterApiServer};
 use fp_rpc::{EthereumRuntimeRPCApi, TransactionStatus};
 
 use crate::{cache::EthBlockDataCacheTask, frontier_backend_client, internal_err};
+
+type Pool<Api> = sc_transaction_pool::Pool<Api, ()>;
 
 pub struct EthFilter<B: BlockT, C, BE, A: ChainApi> {
 	client: Arc<C>,
