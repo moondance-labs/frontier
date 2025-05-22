@@ -7826,7 +7826,6 @@ dependencies = [
  "macrotest",
  "num_enum",
  "precompile-utils",
- "prettyplease",
  "proc-macro2",
  "quote",
  "sp-crypto-hashing 0.1.0 (git+https://github.com/moondance-labs/polkadot-sdk?branch=tanssi-polkadot-stable2412)",
